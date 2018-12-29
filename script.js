@@ -17,6 +17,8 @@ let maxY = 700 - ball.clientHeight;
 let ballX = 340;
 let ballY = 340;
 let position;
+let time1;
+let time2;
 
 function handleOrientation(event) {
   let x = event.beta;
@@ -39,11 +41,14 @@ function handleOrientation(event) {
       (parseInt(ball.style.left) <= parseInt(hole.style.left)+30)
      )
   {
-      window.alert("Game over");
+      time2 = new Date().getTime();
+      let time = (time2 - time1)/1000;
+      window.alert("Game over!\nYour time: " + time.toFixed(3) + " seconds");
       randomHole();
   }
 }
 
 document.getElementById('start').addEventListener('click', function(){
     window.addEventListener('deviceorientation', handleOrientation);
+    time1 = new Date().getTime();
 })
