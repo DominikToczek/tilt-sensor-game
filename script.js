@@ -1,3 +1,4 @@
+// funkcja wyświetlająca 'dziurę' w losowym miejscu na planszy
 function randomHole() {
     let hole = document.getElementById('hole');
     let numOfPixels = Math.floor(Math.random() * 614);
@@ -20,6 +21,7 @@ let position;
 let time1;
 let time2;
 
+// funkcja zmieniająca położenie kulki
 function handleOrientation(event) {
   let x = event.beta;
   let y = event.gamma;
@@ -35,6 +37,7 @@ function handleOrientation(event) {
   ball.style.top  = (maxX*x/180 - 10) + "px";
   ball.style.left = (maxY*y/180 - 10) + "px";
 
+// warunek sprawdzający czy kulka "wpada" do dziury (dokładnie to czy obiekty nachodzą na siebie).
   if ((parseInt(ball.style.top) >= parseInt(hole.style.top)) && 
       (parseInt(ball.style.top) <= parseInt(hole.style.top)+30) &&
       (parseInt(ball.style.left) >= parseInt(hole.style.left)) && 
@@ -43,11 +46,12 @@ function handleOrientation(event) {
   {
       time2 = new Date().getTime();
       let time = (time2 - time1)/1000;
-      window.alert("Game over!\nYour time: " + time.toFixed(3) + " seconds");
+      window.alert("Game over!\nYour time: " + time.toFixed(3) + " seconds"); // jeżeli warunek jest spełniony to wyświetlany jest komunikat o końcu gry oraz o czasie gry
       randomHole();
   }
 }
 
+// funkcja odpowiadająca za rozpoczęcie naliczania czasu gry
 document.getElementById('start').addEventListener('click', function(){
     window.addEventListener('deviceorientation', handleOrientation);
     time1 = new Date().getTime();
